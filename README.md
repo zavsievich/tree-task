@@ -1,31 +1,27 @@
-# tree-task
+# React + TypeScript + Vite
 
-Создать компонент для отрисовки древовидной структуры.
-Пример данных, которые мы можем отрисовать:
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- Phones
-- - Apple
-  - - Iphone 15
-    - - 256gb
-      - 512gb
-  - Samsung
-  - - S20
-    - - 256gb
+Currently, two official plugins are available:
 
-Можно использовать любые данные, которые легко раскладываются в дерево. Допускается генерация данных для того, чтобы продемонстрировать особенности дерева.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Требования к дереву:
- 1. возможность выбирать элементы на разном уровне. Выбор элемента на каком-то уровне означате автоматический выбор всех дочерних.
- 1. раскрытие/закрытие ветки дерева.
- 2. показ количества выбранных элементов (в каком месте и как - решение за разработчиком).
- 3. любые другие возможности, которые посчитаете важными.
+## Expanding the ESLint configuration
 
-Требования по стеку:
- ⁃ react 18
- ⁃ typescript
- ⁃ любой удобный сборщик
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-Требования к проекту
- 1. Должна быть возможность посмотреть компонент, повазимодейтсовать с ним.
- 2. Тесты приветствуются.
- 3. Можно прислать файлом либо выложить на гитхаб и дать ссылку.
+- Configure the top-level `parserOptions` property like this:
+
+```js
+   parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+   },
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
