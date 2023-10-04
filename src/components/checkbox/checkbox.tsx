@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 type CheckboxProps = {
   label?: string;
   checked: boolean;
@@ -5,10 +7,17 @@ type CheckboxProps = {
 }
 
 export const Checkbox = ({ label, checked, onChange }: CheckboxProps) => {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const handleChange = () => {
+    setIsChecked(!isChecked);
+    onChange();
+  }
+
   return (
-    <label className="">
-      <input checked={checked} onChange={onChange} type="checkbox" />
-      {label && <span>{label}</span>}
+    <label className="flex items-center">
+      <input checked={isChecked} onChange={handleChange} type="checkbox" />
+      {label && <span className='ml-2'>{label}</span>}
     </label>
   )
 }

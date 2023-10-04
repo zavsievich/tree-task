@@ -1,22 +1,30 @@
-import './App.css'
-import { List } from './components/list/list-item/list'
+import './App.css';
+import { List } from './components/list/list'
 
-const list = [
+const items = [
   {
-    name: 'hi',
-    checked: false
-  },
-  { name: 'hello', checked: true },
-  { name: 'hey', checked: false }
-]
+    name: "Phones",
+    items: [
+      {name: "Apple", items: [
+        {name: "iPhone 12", items: [
+          {name: "256gb" }, {name: "512gb"}, {name: "1tb"}
+        ]},
+        {name: "iPhone 12 Pro", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
+        {name: "iPhone 12 Pro Max", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
+        {name: "iPhone 12 Mini", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
+      ]},
+    ]
+  }
+];
+
 
 function App () {
   return (
     <>
       <h1>App</h1>
-      <List list={list} />
+      <List items={items} />
     </>
-  )
+  );
 }
 
 export default App
