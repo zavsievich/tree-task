@@ -8,9 +8,16 @@ export type ProductType = {
 type ProductProps = ProductType & {
   className?: string;
   checked?: boolean;
+  dispatch: React.Dispatch<{ type: 'increment' | 'decrement' }>;
 };
 
-export const Product = ({ name, list, className, checked }: ProductProps) => {
+export const Product = ({
+  name,
+  list,
+  className,
+  checked,
+  dispatch,
+}: ProductProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -24,6 +31,8 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
 
   // TODO: component rerenders twice after checking
   useEffect(() => {
+    const action = checked ? 'decrement' : 'increment';
+    dispatch({ type: action });
     if (checked !== undefined) {
       setIsChecked(checked);
     }
