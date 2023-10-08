@@ -4,8 +4,6 @@ import { ProductType } from './types.ts';
 import { Product } from './components/product/product.tsx';
 
 function App() {
-  console.log(products);
-
   return (
     <main>
       <h1>Products</h1>
