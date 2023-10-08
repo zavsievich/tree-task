@@ -1,11 +1,14 @@
-import { ProductType } from '../../types';
+import { useEffect, useState } from 'react';
+
+export type ProductType = {
+  name: string;
+  list?: ProductType[];
+};
 
 type ProductProps = ProductType & {
   className?: string;
   checked?: boolean;
 };
-
-import { useEffect, useState } from 'react';
 
 export const Product = ({ name, list, className, checked }: ProductProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -19,12 +22,12 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
     setIsChecked((prevState) => !prevState);
   };
 
+  // TODO: component rerenders twice after checking
   useEffect(() => {
     if (checked !== undefined) {
       setIsChecked(checked);
     }
   }, [checked]);
-
   console.log('Product rerender', name, isChecked);
 
   return (

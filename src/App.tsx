@@ -1,7 +1,6 @@
 import './App.css';
 import { products } from './data.ts';
-import { ProductType } from './types.ts';
-import { Product } from './components/product/product.tsx';
+import { Product, ProductType } from './components/product/product.tsx';
 
 function App() {
   return (
