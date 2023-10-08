@@ -1,30 +1,19 @@
 import './App.css';
-import { List } from './components/list/list'
+import { products } from './data.ts';
+import { ProductType } from './types.ts';
+import { Product } from './components/product/product.tsx';
 
-const items = [
-  {
-    name: "Phones",
-    items: [
-      {name: "Apple", items: [
-        {name: "iPhone 12", items: [
-          {name: "256gb" }, {name: "512gb"}, {name: "1tb"}
-        ]},
-        {name: "iPhone 12 Pro", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
-        {name: "iPhone 12 Pro Max", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
-        {name: "iPhone 12 Mini", items: [{name: "256gb" }, {name: "512gb"}, {name: "1tb"}] },
-      ]},
-    ]
-  }
-];
+function App() {
+  console.log(products);
 
-
-function App () {
   return (
-    <>
-      <h1>App</h1>
-      <List items={items} />
-    </>
+    <main>
+      <h1>Products</h1>
+      {products.map((product: ProductType) => (
+        <Product name={product.name} list={product.list} />
+      ))}
+    </main>
   );
 }
 
-export default App
+export default App;
