@@ -17,7 +17,7 @@ export const Product = ({ name, list, className }: ProductProps) => {
       <div className="flex items-center">
         <div>{name}</div>
         {list && (
-          <button className="ml-2 p-2" onClick={handleCollapse}>
+          <button className="ml-2 p-1 text-xs" onClick={handleCollapse}>
             {isCollapsed ? '➕' : '➖'}
           </button>
         )}
