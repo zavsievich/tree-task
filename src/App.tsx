@@ -6,9 +6,9 @@ import { Product } from './components/product/product.tsx';
 function App() {
   return (
     <main>
-      <h1>Products</h1>
+      <h1 className="text-xxl uppercase">Products</h1>
       {products.map((product: ProductType) => (
-        <Product name={product.name} list={product.list} />
+        <Product checked={false} name={product.name} list={product.list} />
       ))}
     </main>
   );
