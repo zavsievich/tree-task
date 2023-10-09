@@ -8,9 +8,16 @@ export type ProductType = {
 type ProductProps = ProductType & {
   className?: string;
   checked?: boolean;
+  dispatch: React.Dispatch<{ type: 'increment' | 'decrement' }>;
 };
 
-export const Product = ({ name, list, className, checked }: ProductProps) => {
+export const Product = ({
+  name,
+  list,
+  className,
+  checked,
+  dispatch,
+}: ProductProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -18,7 +25,7 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
     setIsCollapsed((prevState) => !prevState);
   };
 
-  const handleChecked = () => {
+  const handleChange = () => {
     setIsChecked((prevState) => !prevState);
   };
 
@@ -28,6 +35,11 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
       setIsChecked(checked);
     }
   }, [checked]);
+
+  useEffect(() => {
+    dispatch({ type: isChecked ? 'increment' : 'decrement' });
+  }, [isChecked]);
+
   console.log('Product rerender', name, isChecked);
 
   return (
@@ -39,7 +51,7 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
             className="ml-2 w-4 h-4"
             type="checkbox"
             checked={isChecked}
-            onChange={handleChecked}
+            onChange={handleChange}
           />
         </label>
         {list && (
@@ -57,6 +69,7 @@ export const Product = ({ name, list, className, checked }: ProductProps) => {
             list={item.list}
             className="ml-4"
             checked={isChecked}
+            dispatch={dispatch}
           />
         ))}
     </div>
