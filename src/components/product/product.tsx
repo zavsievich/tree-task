@@ -25,18 +25,21 @@ export const Product = ({
     setIsCollapsed((prevState) => !prevState);
   };
 
-  const handleChecked = () => {
+  const handleChange = () => {
     setIsChecked((prevState) => !prevState);
   };
 
   // TODO: component rerenders twice after checking
   useEffect(() => {
-    const action = checked ? 'decrement' : 'increment';
-    dispatch({ type: action });
     if (checked !== undefined) {
       setIsChecked(checked);
     }
   }, [checked]);
+
+  useEffect(() => {
+    dispatch({ type: isChecked ? 'increment' : 'decrement' });
+  }, [isChecked]);
+
   console.log('Product rerender', name, isChecked);
 
   return (
@@ -48,7 +51,7 @@ export const Product = ({
             className="ml-2 w-4 h-4"
             type="checkbox"
             checked={isChecked}
-            onChange={handleChecked}
+            onChange={handleChange}
           />
         </label>
         {list && (
@@ -66,6 +69,7 @@ export const Product = ({
             list={item.list}
             className="ml-4"
             checked={isChecked}
+            dispatch={dispatch}
           />
         ))}
     </div>

@@ -26,7 +26,6 @@ const counterReducer = (state: number, action: CounterActionType) => {
 
 function App() {
   const [count, dispatch] = useReducer(counterReducer, 0);
-
   return (
     <main>
       <h1 className="text-xxl uppercase">Products count: {count}</h1>
