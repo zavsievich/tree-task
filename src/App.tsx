@@ -31,6 +31,7 @@ function App() {
       <h1 className="text-xxl uppercase">Products count: {count}</h1>
       {products.map((product: ProductType) => (
         <Product
+          key={product.name}
           dispatch={dispatch}
           checked={false}
           name={product.name}

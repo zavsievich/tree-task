@@ -26,7 +26,7 @@ const products: ProductType[] = [
         ],
       },
       {
-        name: 'Pixels',
+        name: 'Google',
         list: [
           {
             name: 'Pixel 5',

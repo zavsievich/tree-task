@@ -40,7 +40,7 @@ export const Product = ({
     dispatch({ type: isChecked ? 'increment' : 'decrement' });
   }, [isChecked]);
 
-  console.log('Product rerender', name, isChecked);
+  // console.log('Product rerender', name, isChecked);
 
   return (
     <div className={`flex flex-col items-start text-xl ${className}`}>
