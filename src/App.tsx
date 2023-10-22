@@ -1,7 +1,9 @@
 import './App.css';
-import { useReducer } from 'react';
+import { useReducer, useSyncExternalStore } from 'react';
 import { products } from './data.ts';
 import { Product, ProductType } from './components/product/product.tsx';
+import { Title } from './components/title/title.tsx';
+import { countStore } from './store/countStore.ts';
 
 type CounterActionType = {
   type: 'increment' | 'decrement';
@@ -25,10 +27,14 @@ const counterReducer = (state: number, action: CounterActionType) => {
 };
 
 function App() {
+  const countFromStore = useSyncExternalStore(
+    countStore.subscribe,
+    countStore.get
+  );
   const [count, dispatch] = useReducer(counterReducer, 0);
   return (
     <main>
-      <h1 className="text-xxl uppercase">Products count: {count}</h1>
+      <Title count={count} />
       {products.map((product: ProductType) => (
         <Product
           key={product.name}
