@@ -40,10 +40,6 @@ export const Product = ({
     }
   }, [checked]);
 
-  // useEffect(() => {
-  //   isChecked ? actions?.decrement() : actions?.increment();
-  // }, [isChecked]);
-
   console.log('Product rerender', name, isChecked);
 
   return (
