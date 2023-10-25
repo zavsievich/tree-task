@@ -8,7 +8,10 @@ export type ProductType = {
 type ProductProps = ProductType & {
   className?: string;
   checked?: boolean;
-  dispatch: React.Dispatch<{ type: 'increment' | 'decrement' }>;
+  actions: {
+    increment: () => void;
+    decrement: () => void;
+  };
 };
 
 export const Product = ({
@@ -16,7 +19,7 @@ export const Product = ({
   list,
   className,
   checked,
-  dispatch,
+  actions,
 }: ProductProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -26,6 +29,7 @@ export const Product = ({
   };
 
   const handleChange = () => {
+    isChecked ? actions?.decrement() : actions?.increment();
     setIsChecked((prevState) => !prevState);
   };
 
@@ -36,11 +40,11 @@ export const Product = ({
     }
   }, [checked]);
 
-  useEffect(() => {
-    dispatch({ type: isChecked ? 'increment' : 'decrement' });
-  }, [isChecked]);
+  // useEffect(() => {
+  //   isChecked ? actions?.decrement() : actions?.increment();
+  // }, [isChecked]);
 
-  // console.log('Product rerender', name, isChecked);
+  console.log('Product rerender', name, isChecked);
 
   return (
     <div className={`flex flex-col items-start text-xl ${className}`}>
@@ -69,7 +73,7 @@ export const Product = ({
             list={item.list}
             className="ml-4"
             checked={isChecked}
-            dispatch={dispatch}
+            actions={actions}
           />
         ))}
     </div>
