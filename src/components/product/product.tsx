@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { countStore } from '../../store/countStore';
 
 export type ProductType = {
   name: string;
@@ -7,40 +8,39 @@ export type ProductType = {
 
 type ProductProps = ProductType & {
   className?: string;
-  checked?: boolean;
-  actions: {
-    increment: () => void;
-    decrement: () => void;
-  };
+  checked: boolean;
 };
 
-export const Product = ({
-  name,
-  list,
-  className,
-  checked,
-  actions,
-}: ProductProps) => {
+export const Product = ({ name, list, className, checked }: ProductProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const isMounted = useRef(false);
+
+  const handleChange = () => {
+    setIsChecked((prevState) => !prevState);
+  };
 
   const handleCollapse = () => {
     setIsCollapsed((prevState) => !prevState);
   };
 
-  const handleChange = () => {
-    isChecked ? actions?.decrement() : actions?.increment();
-    setIsChecked((prevState) => !prevState);
-  };
-
-  // TODO: component rerenders twice after checking
   useEffect(() => {
-    if (checked !== undefined) {
-      setIsChecked(checked);
+    if (isMounted.current) {
+      console.log('will be changed', name, isChecked, isMounted.current);
+      isChecked ? countStore.increment() : countStore.decrement();
     }
-  }, [checked]);
+  }, [isChecked]);
 
-  console.log('Product rerender', name, isChecked);
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
+  console.log('isMounted', name, isMounted.current);
 
   return (
     <div className={`flex flex-col items-start text-xl ${className}`}>
@@ -69,7 +69,6 @@ export const Product = ({
             list={item.list}
             className="ml-4"
             checked={isChecked}
-            actions={actions}
           />
         ))}
     </div>
